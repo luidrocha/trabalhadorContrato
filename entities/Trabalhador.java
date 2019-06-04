@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import entities.enuns.NivelTrabalhador;
@@ -97,7 +98,20 @@ public class Trabalhador {
 	
 	public double  Areceber(int Mes, int Ano) {
 		
+		double soma = salarioBase;
 		
+		Calendar cal = Calendar.getInstance();
 		
+		for (ContratosHora c : Contratos) {
+			
+			int c_mes = cal.get(Calendar.MONTH);
+			int c_ano = cal.get(Calendar.YEAR);
+			
+			if (c_mes == Mes && c_ano == Ano) {
+				
+				soma += c.CalculaContrato();
+			}
+		}
+		return soma;
 	}
 }
